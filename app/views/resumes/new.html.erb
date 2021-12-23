@@ -1,0 +1,11 @@
+<h1>Resumes#new</h1>
+<p>Find me in app/views/resumes/new.html.erb</p>
+
+<p style="color: green;">
+  <%= notice %>
+</p>
+
+<%= form_with url: resumes_path, method: :post do |form| %>
+  <%= form.file_field :file %>
+  <%= form.submit "Upload" %>
+<% end %>

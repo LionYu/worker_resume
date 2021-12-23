@@ -30,7 +30,7 @@
 !/tmp/storage/.keep
 
 /public/assets
-/public/resumes
+/public/resumes*
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key

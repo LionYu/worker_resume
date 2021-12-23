@@ -18,14 +18,7 @@ class Worker
 
       printf "##{t_index} - filename: #{filename} \r"
       
-      words = File.read("#{RESUMES_PATH}/#{filename}", :encoding => "ASCII-8BIT")
-                  .downcase.gsub(/\W/, ' ')
-                  .split.uniq
-
-      words.each do |w|
-        @@index[w] ||= []
-        @@index[w] << t_index
-      end
+      update_index_by_file(filename)
     rescue
       puts "Error Index File: #{filename}"
       next
@@ -34,4 +27,28 @@ class Worker
     t2 = Time.now
     puts "+++++ refresh_index finish: cost #{(t2 - t1).to_i} seconds +++++"
   end
+
+  def self.resume_upload(resume_file)
+    resume_filename = filename_for_new_upload
+    FileUtils.mv resume_file.tempfile, "#{RESUMES_PATH}/#{resume_filename}"
+    update_index_by_file(resume_filename)
+  end
+
+  private
+    def self.filename_for_new_upload
+      resume_counts = Dir["#{RESUMES_PATH}/*.txt"].count
+      return "#{(resume_counts + 1).to_s.rjust(5, '0')}.txt"
+    end
+
+    def self.update_index_by_file(filename)
+      file_id = filename.split(".").first.to_i
+      words = File.read("#{RESUMES_PATH}/#{filename}", :encoding => "ASCII-8BIT")
+                  .downcase.gsub(/\W/, ' ')
+                  .split.uniq
+
+      words.each do |w|
+        @@index[w] ||= []
+        @@index[w] << file_id
+      end
+    end
 end

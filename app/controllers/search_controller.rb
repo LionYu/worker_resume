@@ -6,7 +6,7 @@ class SearchController < ApplicationController
     @results = if @q.blank?
       []
     else
-      @q.split.collect{|q| Worker.index[q.downcase] }.inject(:&)
+      @q.split.collect{|q| Worker.index[q.downcase] || [] }.inject(:&)
     end
   end
 
