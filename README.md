@@ -1,24 +1,19 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
 * Ruby version
 
-* System dependencies
+  ruby 3.0.0p0
 
-* Configuration
+* Before start service
 
-* Database creation
+  1. Please unzip the `development-challenge-backend.zip` and copy(or move) the folder `resumes` to `worker_resume/public`
 
-* Database initialization
+  2. Do bundle install
 
-* How to run the test suite
+* Start service
 
-* Services (job queues, cache servers, search engines, etc.)
+  Use command `rails s` to start service, then you can access with `localhost:3000`
 
-* Deployment instructions
+  * ***With `rails s -p 8080` can make the service run on port 8080, so you can access the service with `localhost:8080`***
 
-* ...
+  * ***It will take about 1 minute to initialize the Search Index of worker resumes when strating service***

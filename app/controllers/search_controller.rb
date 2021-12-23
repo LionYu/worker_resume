@@ -6,8 +6,7 @@ class SearchController < ApplicationController
     @results = if @q.blank?
       []
     else
-      # do query and renturn result
-      [1,2,3,4]
+      @q.split.collect{|q| Worker.index[q.downcase] }.inject(:&)
     end
   end
 
